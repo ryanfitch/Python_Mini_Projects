@@ -1,6 +1,6 @@
 # database_basic_SQLite3_ex.py by Ryan Fitch [http://ryan-fitch.com/]
 # Python 3.5.  Basic SQLite3 example
-# Create a db in RAM, create a table with 3 columns, insert 3 rows of data, update 1 of those rows, select 2 of those rows
+# Create a db, create a table with 3 columns, insert 3 rows of data, update 1 of those rows, select 2 of those rows
 
 import sqlite3
 
