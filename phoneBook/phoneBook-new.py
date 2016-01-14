@@ -17,8 +17,8 @@ phonelist = [
   ['Smith, Bob',     '689-1234']
 ]
 
-# for i in phonelist:
-#    print(phonelist[i])
+nameList = [name[0] for name in phonelist]
+
 
 class Phonebook:
 
@@ -48,22 +48,28 @@ class Phonebook:
         ttk.Label(self.frame_content, text = 'Number:').grid(row = 1, column = 1, padx = 5, sticky = 'e')
         # ttk.Label(self.frame_content, text = 'Notes:').grid(row = 2, column = 1, padx = 5, sticky = 'e')
 
-        self.entry_name = ttk.Entry(self.frame_content, width = 12)
-        self.entry_number = ttk.Entry(self.frame_content, width = 12)
+        self.entry_name = ttk.Entry(self.frame_content, width = 16)
+        self.entry_number = ttk.Entry(self.frame_content, width = 16)
         # self.entry_notes = ttk.Entry(self.frame_content, width = 12)
-        self.text_addressBook = Text(self.frame_content, width = 60, height = 20, font = ('Tahoma', 12))
+        self.text_addressBook = Text(self.frame_content, width = 30, height = 20, font = ('Tahoma', 12))
 
-        self.entry_name.grid(row = 0, column = 2, padx = 5)
-        self.entry_number.grid(row = 1, column = 2, padx = 5)
+        ttk.Button(self.frame_content, text = 'Add', command = self.add).grid(row = 4, column = 0, padx = 3, pady = 10)
+        ttk.Button(self.frame_content, text = 'Update').grid(row = 4, column = 1, padx = 3, pady = 10)
+        ttk.Button(self.frame_content, text = 'Delete', command = self.clear).grid(row = 4, column = 2, padx = 3, pady = 10)
+        ttk.Button(self.frame_content, text = 'Find').grid(row = 4, column = 3, padx = 3, pady = 10)
+        
+        self.entry_name.grid(row = 0, column = 2,  columnspan = 3, padx = 5, sticky = 'w')
+        self.entry_number.grid(row = 1, column = 2,  columnspan = 3, padx = 5, sticky = 'w')
         # self.entry_notes.grid(row = 2, column = 2, padx = 5)
         self.text_addressBook.grid(row = 5, column = 0, columnspan = 4, padx = 0)
-        self.text_addressBook.insert(INSERT, phonelist)
+        self.text_addressBook.insert(INSERT, nameList)
 
-        ttk.Button(self.frame_content, text = 'Add', command = self.add).grid(row = 4, column = 0, padx = 5, pady = 10)
-        ttk.Button(self.frame_content, text = 'Update').grid(row = 4, column = 1, padx = 5, pady = 10)
-        ttk.Button(self.frame_content, text = 'Delete', command = self.clear).grid(row = 4, column = 2, padx = 5, pady = 10)
-        ttk.Button(self.frame_content, text = 'Find').grid(row = 4, column = 3, padx = 5, pady = 10)
-
+        # self.treeview = ttk.Treeview(master)        
+        # self.treeview.pack()
+        # self.treeview.config(columns = ('version'))
+        # self.treeview.insert('', '0', 'nameLabel', text = 'Name:')
+        # self.treeview.insert('version', '0', 'nameLabel', text = 'Number:')
+        # self.treeview.heading('', text = 'number:')
 
     def whichSelected (self):
         # print ("At {} of {}".format(select.curselection(), len(phonelist))
@@ -76,24 +82,25 @@ class Phonebook:
         # print('Name: {}'.format(self.entry_name.get()))
         # print('Number: {}'.format(self.entry_number.get()))
         # print('Notes: {}'.format(self.entry_notes.get()))
-        # self.text_addressBook.clear()
+        nameList = [name[0] for name in phonelist]
         messagebox.showinfo(title = 'Add Feedback', message = 'Entry added!')
-        print(phonelist)
-        self.text_addressBook.insert(INSERT, phonelist)
+        self.text_addressBook.delete('1.0', 'end')
+        self.text_addressBook.insert(INSERT, nameList)
         
-
     def clear(self):
         self.entry_name.delete(0, 'end')
         self.entry_number.delete(0, 'end')
         self.entry_notes.delete(0, 'end')
 
-    
-
+    def phonelistName(self):
+        name_view = phonelist.keys()
+        names = list(name_view)
+        names
 
 def main ():
 
     root = Tk()
-    phonebook = Phonebook(root)
+    setSelect (root)
     root.mainloop()
 
 if __name__=="__main__": main()
