@@ -65,13 +65,6 @@ class Phonebook:
         self.text_addressBook.grid(row = 5, column = 0, columnspan = 4, padx = 0)
         self.text_addressBook.insert(INSERT, nameList)
 
-        # self.treeview = ttk.Treeview(master)        
-        # self.treeview.pack()
-        # self.treeview.config(columns = ('version'))
-        # self.treeview.insert('', '0', 'nameLabel', text = 'Name:')
-        # self.treeview.insert('version', '0', 'nameLabel', text = 'Number:')
-        # self.treeview.heading('', text = 'number:')
-
     def whichSelected (self):
         # print ("At {} of {}".format(select.curselection(), len(phonelist))
         # return int(select.curselection()[0])
