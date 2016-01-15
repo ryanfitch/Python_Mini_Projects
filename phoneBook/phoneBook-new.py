@@ -1,10 +1,11 @@
 # phoneBook2.py by Ryan Fitch [http://ryan-fitch.com/]
 # Python 3.5.  Phone / contact app.
 # A simple phone book app made with Python and tkinter for saving and browsing contacts.
+#
 
 from tkinter import *
 from tkinter import ttk
-# from tkinter import messagebox
+from tkinter import messagebox
 
 phonelist = [
   ['Meyers, Chris',  '343-4349'],
@@ -101,7 +102,7 @@ class Phonebook:
 def main ():
 
     root = Tk()
-    # setSelect (root)
+    phonebook = Phonebook(root)
     root.mainloop()
 
 if __name__=="__main__": main()
