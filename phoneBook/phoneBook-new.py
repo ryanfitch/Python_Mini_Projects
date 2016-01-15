@@ -4,7 +4,7 @@
 
 from tkinter import *
 from tkinter import ttk
-from tkinter import messagebox
+# from tkinter import messagebox
 
 phonelist = [
   ['Meyers, Chris',  '343-4349'],
@@ -93,14 +93,15 @@ class Phonebook:
         self.entry_notes.delete(0, 'end')
 
     def phonelistName(self):
-        name_view = phonelist.keys()
-        names = list(name_view)
-        names
+        # name_view = phonelist.keys()
+        # names = list(name_view)
+        # names
+        pass
 
 def main ():
 
     root = Tk()
-    setSelect (root)
+    # setSelect (root)
     root.mainloop()
 
 if __name__=="__main__": main()
