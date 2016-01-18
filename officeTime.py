@@ -2,6 +2,7 @@
 # Python 2.7.  App to show if the office is open in a few different locations.
 # A simple application for checking to see if certain office locations are open in multiple time zones.
 
+
 from time import gmtime, strftime, localtime
 
 # grabbing greenwhich meantime hour and calculating other time zones for Portland & NYC and saving them to variables
