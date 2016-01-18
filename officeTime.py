@@ -1,6 +1,6 @@
 # officeTime.py by Ryan Fitch [http://ryan-fitch.com/]
 # Python 2.7.  App to show if the office is open in a few different locations.
-# A simple application for checking to see if certain office locations are open.
+# A simple application for checking to see if certain office locations are open in multiple time zones.
 
 from time import gmtime, strftime, localtime
 
