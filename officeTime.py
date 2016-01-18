@@ -11,17 +11,7 @@ gmHour = int(strftime("%H", gmtime()))
 gmMinute = int(strftime("%M", gmtime()))
 # grabbing local portland hour and saving it to a variable
 portHour = int(strftime("%H"))
-
-# sets the nyc military hour
-def nyChange (portHour):
-    if (portHour < 21):
-        nyHour = portHour + 3
-        return nyHour
-    else:
-        nyHour = portHour - 12
-        return nyHour
-
-nyHour = nyChange(portHour)
+nyHour = portHour + 3
 
 # defines main function to see if the time passed-in is within office hours and also converts it from military time.
 def isOpen (curTime):
@@ -38,9 +28,12 @@ def isOpen (curTime):
         location = "Portland"
         amPm = strftime("%p")
     else:
-        if curTime >= 3: 
+        if (curTime >= 3) and (curTime <= 9): 
             location = "New York City"
             amPm = strftime("%p")
+        elif (curTime > 9) and (curTime < 13):
+            locaton = "New York City"
+            amPM = "PM"
         else:
             location = "New York City"
             amPm = "AM"
