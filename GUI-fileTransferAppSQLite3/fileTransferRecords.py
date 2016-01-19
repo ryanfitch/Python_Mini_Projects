@@ -1,3 +1,4 @@
+# Python DB creator for use with the fileTransferProgram
 
 import sqlite3 as sql
 
