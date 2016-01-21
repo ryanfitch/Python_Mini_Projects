@@ -1,4 +1,6 @@
-# original script
+# GUI-HTML-Generator.py by Ryan Fitch [http://ryan-fitch.com/]
+# Python 3.5  GUI HTML Generator App
+# HTML GENERATOR APP constructed with Python 3.5 and tkinter.
 
 import webbrowser
 from tkinter import *
@@ -52,7 +54,7 @@ class HTMLgenerator:
 
         # TEXT
         self.html = Text(self.htmltab, width = 55, height = 15)
-        self.html.insert(1.0, '<DOCTYPE html>\n<html lang = \'en\'>\n<meta charset = \'utf-8\'>\n<html> \n  <header> \n\n<-- Your New Text Goes Here -->\n\n  </header>\n</html>')
+        self.html.insert(1.0, '<DOCTYPE html>\n<html lang = \'en\'>\n<meta charset = \'utf-8\'>\n<html> \n  <header> \n\n<!-- Your New Text Goes Here -->\n\n  </header>\n</html>')
         self.html.pack()
 
 
@@ -71,12 +73,9 @@ class HTMLgenerator:
     def clear_(self):
         self.html.delete(1.0, 'end')
 
-    def clearheader_(self):
-        self.html.delete(1.0, 'end')
-
     def htmlbuild_(self):
         html = open('index.html', 'w')
-        html.write(self.html.get(0, 'end'))
+        html.write(self.html.get(0.0, 'end'))
 
 
 def main():
