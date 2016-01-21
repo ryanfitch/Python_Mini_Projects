@@ -2,7 +2,6 @@
 # Python 3.5  GUI File Tansfer App
 # FILE TRANSFER APP constructed with Python 3.5 and tkinter and connecting to the SQLite database.
 
-
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox as mb
