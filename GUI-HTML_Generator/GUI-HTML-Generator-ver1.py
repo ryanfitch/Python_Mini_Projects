@@ -54,7 +54,7 @@ class HTMLgenerator:
 
         # TEXT
         self.html = Text(self.htmltab, width = 55, height = 15)
-        self.html.insert(1.0, '<DOCTYPE html>\n<html lang = \'en\'>\n<meta charset = \'utf-8\'>\n<html> \n  <header> \n\n<!-- Your New Text Goes Here -->\n\n  </header>\n</html>')
+        self.html.insert(1.0, '<DOCTYPE html>\n<html lang = \'en\'>\n<meta charset = \'utf-8\'>\n<html> \n  <header>\n       <h1>Stay tuned for our amazing summer sale!</h1>\n<p>\n\n<!-- Your New Text Goes Here -->\n\n</p>\n  </header>\n</html>')
         self.html.pack()
 
 
