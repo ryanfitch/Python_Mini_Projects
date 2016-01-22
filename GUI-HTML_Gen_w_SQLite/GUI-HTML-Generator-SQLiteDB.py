@@ -1,107 +1,158 @@
 # GUI-HTML-Generator-SQLiteDB.py by Ryan Fitch [http://ryan-fitch.com/]
-# Python 3.5  GUI HTML Generator App
+# Python 3.5  GUI HTML Generator App DB
 # HTML GENERATOR APP constructed with Python 3.5, tkinter and SQLite3.
 
-import webbrowser
 from tkinter import *
-from tkinter import ttk
 import sqlite3
+import webbrowser
 
-
-class HTMLgenerator:
+class HTMLgenerator():
 
     def __init__(self, master):
+        frame=Frame(master, width=80, height=50)
+        frame.pack()
 
-        #MASTER
+        # MASTER
         master.title('HTML GENERATOR')
         master.resizable(True, True)
-        master.configure(background = 'black')
+        master.configure(background = "#e9e9e9")
 
-        #IMAGES
+        # IMAGES
         img1 = PhotoImage(file = 'Drawing.gif')
         self.openclose = img1
 
-        #HEADER
-        self.header_frame = ttk.Frame(master)
-        self.header_frame.pack(fill = BOTH, expand = 1)
-        #self.header_frame.config
-        ttk.Label(self.header_frame, image = self.openclose).grid(row = 0, column = 0)
-        self.mainheader = ttk.Label(self.header_frame, text = '')
-        self.mainheader.grid(row = 0, column = 1)
-        self.mainheader.config(background = 'white')
+        
+        # HEADER
+        self.text = Label(frame, image = self.openclose)
+        self.text.pack()
+        self.text.grid(row=0, sticky=W)
+        self.text["text"] = "HTML Generator"
+        self.text.config(background = "#e9e9e9")
+
+        self.lab = Label(frame, text="stuff1")
+        self.lab.pack(side=LEFT)
+        self.lab.grid(row=1)
 
 
-        #MAIN FRAME
-        self.main = ttk.Frame(master)
-        self.main.pack(fill = BOTH, expand = 2)
+        # TEXT FIELDS
+        self.cont1Field = Entry(frame, text = "stuff1", width=49)
+        self.cont1Field.insert(0, "Enter New <H1> Content")
+        self.cont1Field.pack()
+        self.cont1Field.grid(row=1)
+        self.cont1Field.bind("<FocusIn>", self.clearcont1Field)
+        self.cont1Field.config(background = "#faf8f8")
+
+        self.cont2Field = Entry(frame, text = "stuff2", width=49)
+        self.cont2Field.insert(0, "Optional Secondary <p> Content")
+        self.cont2Field.pack()
+        self.cont2Field.grid(row=2)
+        self.cont2Field.bind("<FocusIn>", self.clearcont2Field)
+        self.cont2Field.config(background = "#faf8f8")
 
 
-        #NOTEBOOK (TABS)
-        self.notebook = ttk.Notebook(self.main)
-        self.notebook.pack(fill = BOTH, expand = 1)
+        # BUTTONS
+        self.btn=Button(frame, text='Add Content', command=self.add_note)
+        self.btn.pack()
+        self.btn.grid(row=5, rowspan=1, sticky="w")
 
-        #TABS
-        self.prog = ttk.Frame(self.notebook)
-        ttk.Label(self.prog, text = "Hi There!\nWelcome to my Python app.\nJust click the HTML INPUT tab \nand insert your new text.\nWhen you're feeling good about it...\nClick HTML ME! to generate the html file.").grid(row = 0, column = 0, pady = 70, padx = 77)
+        self.delbtn = Button(frame, text='Delete Content', command=self.del_notes)
+        self.delbtn.pack()
+        self.delbtn.grid(row=5, rowspan=1)
 
-        self.headertab = ttk.Frame(self.notebook)
-        self.bodytab = ttk.Frame(self.notebook)
-        self.notebook.add(self.prog, text = 'OVERVIEW')
-        self.notebook.add(self.headertab, text = 'CONTENT DB')
-        self.notebook.add(self.bodytab, text = 'HTML')
+        self.htmlBtn = Button(frame, text='Save HTML', command=self.htmlbuild)
+        self.htmlBtn.pack()
+        self.htmlBtn.grid(row=5, rowspan=1, sticky="e")
 
-        self.headerlabel = ttk.Label(self.headertab, text = 'Database placeholder:')
-        self.headerlabel.pack()
-
-
-        #TEXT
-        self.header = Text(self.headertab, width = 55, height = 15)
-        self.header.insert(1.0, 'place holder')
-        self.header.pack()
-        self.body = Text(self.bodytab, width = 55, height = 15)
-        self.body.insert(1.0, '<DOCTYPE html>\n<html lang = \'en\'>\n<meta charset = \'utf-8\'>\n<html> \n  <header> \n\n  </header>')
-        self.body.pack()
+        self.content=Listbox(master, width=50)
+        self.content.pack(padx = 25, pady = 15)
+        self.content.config(background = "#faf8f8")
 
 
-        #BUTTONS
-        self.run = ttk.Button(self.main, text = 'GENERATE MY NEW HTML!')
-        self.run.pack(side= RIGHT)
-        self.headerclear = ttk.Button(self.headertab, text = 'INSERT CONTENT')
-        self.headerclear.pack(side = RIGHT, padx = 101)
-        self.bodyclear = ttk.Button(self.bodytab, text = 'CLEAR')
-        self.bodyclear.pack(side = RIGHT, padx = 101)
+        # OPEN DATABASE
+        self.conn = sqlite3.connect('newHTMLcontent.db')
+
+        c = self.conn.cursor()
+
+        # CREATE TABLE
+        c.execute('''CREATE TABLE IF NOT EXISTS newContent(stuff1 TEXT primary key, stuff2 TEXT)''')
+        self.conn.commit()
+
+        # ADD CONTENT DATA
+        c.execute("INSERT INTO newContent VALUES('Stay tuned for our amazing summer sale!','')")
+        self.conn.commit()
+        
+        # READ CONTENT
+        newContent = c.execute("SELECT * FROM newContent")
+        self.conn.commit()
+
+        # ADD TO LIST
+        for stuff in newContent:
+            self.content.insert(END, stuff)
+
+        c.close()
+
+    def clearcont1Field(self, event):
+        self.cont1Field.delete(0,END)
+
+    def clearcont2Field(self, event):
+        self.cont2Field.delete(0,END)
+
+    def add_note(self):
+        if self.cont1Field.get() == "":
+            self.text["text"] = "Please add some new content:"
+        else:
+            item1 = self.cont1Field.get()
+            item2 = self.cont2Field.get()
+
+            self.cont1Field.delete(0, END)
+            self.cont2Field.delete(0, END)
+
+            # ADD TO DATABASE
+            c = self.conn.cursor()
+            c.execute("INSERT INTO newContent VALUES (?, ?)", (item1, item2))
+            self.conn.commit()
+            c.close()
+
+            # ADD TO LIST
+            self.content.insert(END, (item1, item2))
 
 
-        #BIND
-        self.clear.bind('<1>', lambda e: self.clear_())
-        self.headerclear.bind('<1>', lambda e: self.clearheader_())
-        self.bodyclear.bind('<1>', lambda e: self.clearbody_())
-        self.footerclear.bind('<1>', lambda e: self.clearfooter_())
-        self.cssclear.bind('<1>', lambda e: self.clearcss_())
-        self.jsclear.bind('<1>', lambda e: self.clearjs_())
+    def del_notes(self):
+        # GET SELECTED CONTENT       
+        person = self.content.get(ACTIVE)
+        stuff1 = person[0]
 
-    #EVENTS
-    def clear_(self):
-        self.header.delete(1.0, 'end')
-        self.body.delete(1.0, 'end')
-        self.footer.delete(1.0, 'end')
-        self.css.delete(1.0, 'end')
-        self.js.delete(1.0, 'end')
+        # DELETE IN DATABASE
+        c = self.conn.cursor()
+        c.execute("DELETE FROM newContent WHERE stuff1=?", [stuff1])
+        self.conn.commit()
+        c.close()
 
-    def clearheader_(self):
-        self.header.delete(1.0, 'end')
+        # DELETE ON LIST
+        self.content.delete(ANCHOR)
 
-    def clearbody_(self):
-        self.body.delete(1.0, 'end')
+    def __del__(self): 
+        # CLOSE DATABASE
+        self.conn.close()
 
-    def htmlbuild_(self):
-        html = open('html.html', 'w')
-        html.write(self.header.get(0, 'end'))
+    def htmlbuild(self):
+        person = self.content.get(ACTIVE)
+        content1 = person[0]
+        content2 = person[1]
+        if content1 == "Enter New <H1> Content":
+            content1 = ""
+        elif content2 == "Optional Secondary <p> Content":
+            content2 = ""
+
+        # OUTPUT NEW INDEX.HTML
+        html = open('index.html', 'w')
+        newHTML = "<DOCTYPE html>\n<html lang = \'en\'>\n<meta charset = \'utf-8\'>\n<html> \n  <header>\n       <h1>{}</h1>\n<p>{}</p>\n  </header>\n</html>".format(content1, content2)
+        html.write(newHTML)
+        html.close()
+        messagebox.showinfo(title='HTML GENERATOR', message='Your new index.html is located in the root directory!')
 
 
-def main():
-    root = Tk()
-    HGen = HTMLgenerator(root)
-    root.mainloop()
+root = Tk()
+HTMLgenerator(root)
+root.mainloop()
 
-if __name__ == '__main__': main()
