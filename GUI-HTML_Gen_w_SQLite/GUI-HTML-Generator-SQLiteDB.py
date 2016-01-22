@@ -78,8 +78,8 @@ class HTMLgenerator():
         self.conn.commit()
 
         # ADD CONTENT DATA
-        c.execute("INSERT INTO newContent VALUES('Stay tuned for our amazing summer sale!','')")
-        self.conn.commit()
+        # c.execute("INSERT INTO newContent VALUES('Stay tuned for our amazing summer sale!','')")
+        # self.conn.commit()
         
         # READ CONTENT
         newContent = c.execute("SELECT * FROM newContent")
@@ -99,7 +99,12 @@ class HTMLgenerator():
 
     def add_note(self):
         if self.cont1Field.get() == "":
-            self.text["text"] = "Please add some new content:"
+            item1 = " "
+            item2 = self.cont2Field.get()
+
+            self.cont1Field.delete(0, END)
+            self.cont2Field.delete(0, END)
+            
         else:
             item1 = self.cont1Field.get()
             item2 = self.cont2Field.get()
