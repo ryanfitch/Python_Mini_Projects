@@ -1,6 +1,7 @@
 # Pig_Latin.py by Ryan Fitch [http://ryan-fitch.com/]
 # Python 2.5  A program which turns anyword into pig latin.
 
+
 def main():
 
     pyg = 'ay'
