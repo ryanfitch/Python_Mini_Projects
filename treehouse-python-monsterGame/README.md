@@ -1,17 +1,7 @@
-# Monster Quest
- _   .-')                     .-') _   .-')    .-') _     ('-.  _  .-')             .-')                    ('-.    .-')    .-') _ 
-( '.( OO )_                  ( OO ) ) ( OO ). (  OO) )  _(  OO)( \( -O )          .(  OO)                 _(  OO)  ( OO ). (  OO) ) 
- ,--.   ,--.).-'),-----. ,--./ ,--,' (_)---\_)/     '._(,------.,------.         (_)---\_)   ,--. ,--.   (,------.(_)---\_)/     '._ 
- |   `.'   |( OO'  .-.  '|   \ |  |\ /    _ | |'--...__)|  .---'|   /`. '        '  .-.  '   |  | |  |    |  .---'/    _ | |'--...__) 
- |         |/   |  | |  ||    \|  | )\  :` `. '--.  .--'|  |    |  /  | |       ,|  | |  |   |  | | .-')  |  |    \  :` `. '--.  .--'
- |  |'.'|  |\_) |  |\|  ||  .     |/  '..`''.)   |  |  (|  '--. |  |_.' |      (_|  | |  |   |  |_|( OO )(|  '--.  '..`''.)   |  |  
- |  |   |  |  \ |  | |  ||  |\    |  .-._)   \   |  |   |  .--' |  .  '.'        |  | |  |   |  | | `-' / |  .--' .-._)   \   |  |  
- |  |   |  |   `'  '-'  '|  | \   |  \       /   |  |   |  `---.|  |\  \         '  '-'  '-.('  '-'(_.-'  |  `---.\       /   |  |    
- `--'   `--'     `-----' `--'  `--'   `-----'    `--'   `------'`--' '--'         `-----'--'  `-----'     `------' `-----'    `--'    
-
+# Monster Quest Game
 
 ### Description
 
-A Simple Console-based Python Game.
+Console-based Python-3 Game.
 
-Simple monster game using classes and objects based on Treehouse Object-Oriented Python Course.
+A simple monster game using classes and objects based on Treehouse Object-Oriented Python Course.
